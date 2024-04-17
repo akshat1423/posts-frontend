@@ -13,7 +13,7 @@ function PostDetail() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/posts/${id}/`)
+    axios.get(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`)
       .then(res => {
         setPost(res.data);
       })
@@ -27,7 +27,7 @@ function PostDetail() {
       return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/api/posts/${id}/`, {
+    axios.delete(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`, {
       headers: {
         'Authorization': `Token ${token}`
       }
