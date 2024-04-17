@@ -21,7 +21,7 @@ function EditPost() {
 
     useEffect(() => {
         if (!isNewPost) {
-            axios.get(`http://127.0.0.1:8000/api/posts/${id}/`)
+            axios.get(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`)
                 .then(response => {
                     setPost(response.data);
                 })
@@ -93,9 +93,9 @@ function EditPost() {
     
         try {
             if (isNewPost) {
-                await axios.post('http://127.0.0.1:8000/api/posts/', formData, config);
+                await axios.post('https://akshatjainiitb.pythonanywhere.com/api/posts/', formData, config);
             } else {
-                await axios.put(`http://127.0.0.1:8000/api/posts/${id}/`, formData, config);
+                await axios.put(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`, formData, config);
             }
             navigate('/');
         } catch (error) {
