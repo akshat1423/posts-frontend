@@ -16,7 +16,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api-token-auth/', credentials);
+      const response = await axios.post('https://akshatjainiitb.pythonanywhere.com/api-token-auth/', credentials);
       localStorage.setItem('token', response.data.token);
       
       const userName = credentials.username;
