@@ -74,7 +74,7 @@ function Home() {
                             <CardContent sx={{ flexGrow: 1 }} onClick={() => navigate(`/posts/${post.id}`)} style={{ cursor: 'pointer' }}>
                                 <Typography variant="h5" component="h2">{post.title}</Typography>
                                 <Typography variant="body2" color="text.secondary">{post.summary}</Typography>
-                                <Typography variant="h5" color="text.secondary">By{post.author_name}</Typography>
+                                <Typography variant="body2">By {post.author_name}</Typography>
 
                             </CardContent>
                             {isAuthenticated() && (
