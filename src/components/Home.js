@@ -13,7 +13,7 @@ function Home() {
     const { currentUser } = useAuth(); 
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/posts/')
+        axios.get('https://akshatjsarc.pythonanywhere.com/api/posts/')
             .then(res => {
                 setPosts(res.data);
             })
@@ -31,7 +31,7 @@ function Home() {
             return;
         }
         
-        axios.delete(`http://127.0.0.1:8000/api/posts/${id}/`, {
+        axios.delete(`https://akshatjsarc.pythonanywhere.com/api/posts/${id}/`, {
             headers: {
                 Authorization: `Token ${token}`
             }
