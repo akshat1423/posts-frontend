@@ -1,6 +1,6 @@
 // RichTextEditor.js
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Box, Button, IconButton, Toolbar, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
@@ -15,8 +15,8 @@ import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 
 const RichTextEditor = ({ initialValue, onChange }) => {
   const editorRef = useRef(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [linkUrl, setLinkUrl] = useState('');
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [linkUrl, setLinkUrl] = React.useState('');
 
   useEffect(() => {
     if (initialValue) {
