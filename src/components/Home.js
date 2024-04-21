@@ -74,7 +74,18 @@ function Home() {
                             <CardContent sx={{ flexGrow: 1 }} onClick={() => navigate(`/posts/${post.id}`)} style={{ cursor: 'pointer' }}>
                                 <Typography variant="h5" component="h2">{post.title}</Typography>
                                 <Typography variant="body2" color="text.secondary">{post.summary}</Typography>
-                                <Typography variant="body2">By {post.author_name}</Typography>
+                                 <Typography variant="body2" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span>By {post.author_name}</span><span>
+                                {post.is_private ? (
+                                    <>
+                                    <Lock fontSize="x-small" /> Private
+                                    </>
+                                ) : (
+                                    <>
+                                    <LockOpen fontSize="x-small" /> Public
+                                    </>
+                                )}</span>
+                                </Typography>
 
                             </CardContent>
                             {isAuthenticated() && (
