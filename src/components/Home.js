@@ -32,7 +32,7 @@ function Home() {
             return;
         }
         
-        axios.delete(`http://127.0.0.1:8000/api/posts/${id}/`, {
+        axios.delete(`https://akshatjsarc.pythonanywhere.com/api/posts/${id}/`, {
             headers: {
                 Authorization: `Token ${token}`
             }
