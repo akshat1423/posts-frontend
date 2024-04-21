@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Box, Button, IconButton, Toolbar, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
+import { Button, IconButton, Toolbar, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
@@ -17,27 +17,20 @@ const RichTextEditor = ({ initialValue, onChange }) => {
   const [linkUrl, setLinkUrl] = useState('');
 
   useEffect(() => {
-    if (initialValue) {
-      editorRef.current.innerHTML = initialValue;
-    }
+    editorRef.current.innerHTML = initialValue || '';
   }, [initialValue]);
 
-  useEffect(() => {
-    const handleInput = () => {
-      onChange(editorRef.current.innerHTML);
-    };
-    
-    const editor = editorRef.current;
-    editor.addEventListener('input', handleInput);
-    
-    return () => {
-      editor.removeEventListener('input', handleInput);
-    };
-  }, [onChange]);
+  const handleInput = () => {
+    onChange(editorRef.current.innerHTML);
+  };
 
   const handleExecCommand = (command, argument = null) => {
-    document.execCommand(command, false, argument);
-    onChange(editorRef.current.innerHTML);
+    try {
+      document.execCommand(command, false, argument);
+      handleInput(); // Trigger onChange here
+    } catch (error) {
+      console.error('Error executing command:', error);
+    }
   };
 
   const toggleDialog = () => {
@@ -66,9 +59,24 @@ const RichTextEditor = ({ initialValue, onChange }) => {
         </Toolbar>
       </Grid>
       <Grid item>
-        <Box sx={{ border: '1px solid #ccc', padding: '10px', minHeight: '150px', cursor: 'text', borderRadius: '4px', ':focus-within': { borderColor: 'primary.main' } }}>
-          <div ref={editorRef} contentEditable style={{ outline: 'none', minHeight: '100px' }} aria-label="Rich Text Editor" />
-        </Box>
+        <TextField
+          fullWidth
+          variant="outlined"
+          multiline
+          rows={5}
+          value={editorRef.current ? editorRef.current.innerHTML : ''}
+          onChange={handleInput}
+          InputProps={{
+            style: { minHeight: '100px' },
+            inputComponent: 'div',
+            inputProps: {
+              ref: editorRef,
+              contentEditable: true,
+              suppressContentEditableWarning: true,
+              'aria-label': 'Rich Text Editor'
+            }
+          }}
+        />
       </Grid>
       <Dialog open={dialogOpen} onClose={toggleDialog}>
         <DialogTitle>Insert a Link</DialogTitle>
