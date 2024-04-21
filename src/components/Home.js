@@ -14,7 +14,7 @@ function Home() {
     const { currentUser } = useAuth(); 
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/posts/')
+        axios.get('https://akshatjsarc.pythonanywhere.com/api/posts/')
             .then(res => {
                 setPosts(res.data);
             })
@@ -55,14 +55,14 @@ function Home() {
         console.log(posts.find(post => post.id === postId)?.likes.includes(currentUser))
         const isPostLiked = posts.find(post => post.id === postId)?.likes.includes(currentUser);
 
-        axios.post(`http://127.0.0.1:8000/api/posts/${postId}/like/`, {}, {
+        axios.post(`https://akshatjsarc.pythonanywhere.com/api/posts/${postId}/like/`, {}, {
             headers: {
                 Authorization: `Token ${token}`
             }
         })
         .then(() => {
             // Refresh posts after liking/unliking
-            axios.get('http://127.0.0.1:8000/api/posts/')
+            axios.get('https://akshatjsarc.pythonanywhere.com/api/posts/')
                 .then(res => {
                     setPosts(res.data);
                 })
