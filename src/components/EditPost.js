@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import RichTextEditor from './RichTextEditor'; // Assuming RichTextEditor is in the same directory
 
 function EditPost() {
     const { id } = useParams();
@@ -39,6 +40,13 @@ function EditPost() {
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
+    };
+
+    const handleContentChange = (content) => {
+        setPost(prevPost => ({
+            ...prevPost,
+            content: content,
+        }));
     };
 
     const handleSubmit = async (event) => {
@@ -80,7 +88,9 @@ function EditPost() {
             <form onSubmit={handleSubmit}>
                 <TextField fullWidth label="Title" name="title" value={post.title} onChange={handleChange} margin="normal" required />
                 <TextField fullWidth label="Summary" name="summary" value={post.summary} onChange={handleChange} margin="normal" required />
-                <TextField fullWidth label="Content" name="content" value={post.content} onChange={handleChange} margin="normal" required multiline rows={4} />
+                {/* Replace regular TextField with RichTextEditor */}
+                <RichTextEditor initialValue={post.content} onChange={handleContentChange} />
+                {/* <TextField fullWidth label="Content" name="content" value={post.content} onChange={handleChange} margin="normal" required multiline rows={4} /> */}
                 <input type="file" onChange={handleFileChange} />
                 <Box sx={{ mt: 2 }}>
                     <Button type="submit" variant="contained">Save</Button>
