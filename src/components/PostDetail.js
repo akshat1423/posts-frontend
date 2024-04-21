@@ -16,7 +16,7 @@ function PostDetail() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get(`http://127.0.0.1:8000/api/posts/${id}/`, 
+    axios.get(`https://akshatjsarc.pythonanywhere.com/api/posts/${id}/`, 
     {
       headers: {
         'Authorization': `Token ${token}`
@@ -39,7 +39,7 @@ function PostDetail() {
       return;
     }
 
-    axios.delete(`http://127.0.0.1:8000/api/posts/${id}/`, {
+    axios.delete(`https://akshatjsarc.pythonanywhere.com/api/posts/${id}/`, {
       headers: {
         'Authorization': `Token ${token}`
       }
@@ -61,7 +61,7 @@ function PostDetail() {
       return;
     }
 
-    axios.patch(`http://127.0.0.1:8000/api/posts/${id}/`, { is_private: updatedPrivacy }, {
+    axios.patch(`https://akshatjsarc.pythonanywhere.com/api/posts/${id}/`, { is_private: updatedPrivacy }, {
       headers: {
         'Authorization': `Token ${token}`
       }
