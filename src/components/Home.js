@@ -13,7 +13,7 @@ function Home() {
     const { currentUser } = useAuth(); 
 
     useEffect(() => {
-        axios.get('https://akshatjainiitb.pythonanywhere.com/api/posts/')
+        axios.get('http://127.0.0.1:8000/api/posts/')
             .then(res => {
                 setPosts(res.data);
             })
@@ -31,7 +31,7 @@ function Home() {
             return;
         }
         
-        axios.delete(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`, {
+        axios.delete(`http://127.0.0.1:8000/api/posts/${id}/`, {
             headers: {
                 Authorization: `Token ${token}`
             }
@@ -48,7 +48,7 @@ function Home() {
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>Blog Posts</Typography>
+            <Typography variant="h4" gutterBottom margin={"20px"}>Posts</Typography>
             {isAuthenticated() && (
                 <Button 
                   startIcon={<AddCircleOutlineIcon />}

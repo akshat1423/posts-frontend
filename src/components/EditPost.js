@@ -21,7 +21,7 @@ function EditPost() {
 
     useEffect(() => {
         if (!isNewPost) {
-            axios.get(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`)
+            axios.get(`http://127.0.0.1:8000/api/posts/${id}/`)
                 .then(response => {
                     setPost(response.data);
                 })
@@ -41,38 +41,6 @@ function EditPost() {
         setFile(event.target.files[0]);
     };
 
-    // const handleSubmit = (event) => {
-    //     console.log("1")
-        
-    //     event.preventDefault();
-    //     const token = localStorage.getItem('token');
-    //     const formData = new FormData();
-
-    //     formData.append('title', post.title);
-    //     formData.append('summary', post.summary);
-    //     formData.append('content', post.content);
-    //     if (file) {
-    //         formData.append('image', file);
-    //     }
-
-    //     const config = {
-    //         headers: { 
-    //             'Authorization': `Token ${token}`,
-    //             'Content-Type': 'multipart/form-data',
-    //         },
-    //     };
-    //     const method = isNewPost ? axios.post : axios.put;
-    //     console.log(id)
-    //     console.log(isNewPost)
-    //     // const url = `http://127.0.0.1:8000/api/posts/${isNewPost ? '' : id + '/'}`;
-    //     const url = `http://127.0.0.1:8000/api/posts/${isNewPost ? '' : ""}`;
-
-    //     console.log(url)
-    //     console.log(isNewPost ? '' : id + '/')
-    //     method(url, formData, config)
-    //         .then(() => navigate('/'))
-    //         .catch(err => console.error("Failed to save the post:", err));
-    // };
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -93,9 +61,9 @@ function EditPost() {
     
         try {
             if (isNewPost) {
-                await axios.post('https://akshatjainiitb.pythonanywhere.com/api/posts/', formData, config);
+                await axios.post('http://127.0.0.1:8000/api/posts/', formData, config);
             } else {
-                await axios.put(`https://akshatjainiitb.pythonanywhere.com/api/posts/${id}/`, formData, config);
+                await axios.put(`http://127.0.0.1:8000/api/posts/${id}/`, formData, config);
             }
             navigate('/');
         } catch (error) {
@@ -106,7 +74,7 @@ function EditPost() {
     
     return (
         <Container maxWidth="sm">
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom margin={"20px"}>
                 {isNewPost ? 'Add New Post' : 'Edit Post'}
             </Typography>
             <form onSubmit={handleSubmit}>
