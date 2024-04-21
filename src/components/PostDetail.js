@@ -124,11 +124,21 @@ function PostDetail() {
           <Typography variant="body2" color="primary" paragraph sx={{ fontStyle: 'italic', fontSize: '1rem', color: '#1976d2', mt: 2 }}>
             {post.summary}
           </Typography>
-          <Typography variant="body1" paragraph>
-            {post.content.split('\n').map((paragraph, i) => (
-              <React.Fragment key={i}>{paragraph}<br/></React.Fragment>
-            ))}
+          <Typography variant="body2" color="primary" paragraph sx={{ fontStyle: 'italic', fontSize: '1rem', color: '#1976d2', mt: 2 }}>
+            {post.summary}
           </Typography>
+          <Typography variant="body1" paragraph>
+  {post.content.includes('<') ? (
+    <div dangerouslySetInnerHTML={{ __html: post.content }} />
+  ) : (
+    post.content.split('\n').map((paragraph, i) => (
+      <React.Fragment key={i}>
+        {paragraph}
+        <br />
+      </React.Fragment>
+    ))
+  )}
+</Typography>
           {user && user.id === post.author_id && (
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', position: 'absolute', top: 16, right: 16 }}>
               <IconButton component={Link} to={`/edit/${post.id}`} aria-label="edit" color="primary">
