@@ -124,9 +124,6 @@ function PostDetail() {
           <Typography variant="body2" color="primary" paragraph sx={{ fontStyle: 'italic', fontSize: '1rem', color: '#1976d2', mt: 2 }}>
             {post.summary}
           </Typography>
-          <Typography variant="body2" color="primary" paragraph sx={{ fontStyle: 'italic', fontSize: '1rem', color: '#1976d2', mt: 2 }}>
-            {post.summary}
-          </Typography>
           <Typography variant="body1" paragraph>
   {post.content.includes('<') ? (
     <div dangerouslySetInnerHTML={{ __html: post.content }} />
