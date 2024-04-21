@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'; 
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { Lock, LockOpen } from '@mui/icons-material';
 
 function Home() {
     const [posts, setPosts] = useState([]);
