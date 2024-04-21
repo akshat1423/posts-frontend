@@ -136,7 +136,8 @@ function PostDetail() {
     ))
   )}
 </Typography>
-          {user && user.id === post.author_id && (
+          
+            {user && user === post.author_name && (
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', position: 'absolute', top: 16, right: 16 }}>
               <IconButton component={Link} to={`/edit/${post.id}`} aria-label="edit" color="primary">
                 <EditIcon />
