@@ -42,6 +42,21 @@ const RichTextEditor = ({ initialValue, onChange }) => {
     toggleDialog();
   };
 
+  const handlePaste = (event) => {
+    const clipboardData = event.clipboardData || window.clipboardData;
+    const pastedData = clipboardData.getData('text/html');
+
+    // Check if pasted content is an image
+    if (pastedData.includes('<img')) {
+      // Set image attributes to allow resizing
+      const modifiedPastedData = pastedData.replace('<img', '<img contenteditable="false" resizable="true"');
+      // Prevent default paste behavior
+      event.preventDefault();
+      // Paste the modified content
+      document.execCommand('insertHTML', false, modifiedPastedData);
+    }
+  };
+
   return (
     <Grid container direction="column" alignItems="stretch">
       <Grid item>
@@ -66,8 +81,15 @@ const RichTextEditor = ({ initialValue, onChange }) => {
           rows={5}
           value={editorRef.current ? editorRef.current.innerHTML : ''}
           onChange={handleInput}
+          onPaste={handlePaste} // Handle paste event
           InputProps={{
-            style: { minHeight: '100px' },
+            style: { 
+              minHeight: '100px',
+              textAlign: 'left', // Set text alignment to left
+              paddingTop: '10px', // Add padding to top
+              paddingLeft: '10px', // Add padding to left
+              verticalAlign: 'top' // Set vertical alignment to top
+            },
             inputComponent: 'div',
             inputProps: {
               ref: editorRef,
